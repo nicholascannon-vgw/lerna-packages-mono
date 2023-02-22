@@ -1,8 +1,8 @@
 {
-    "name": "cool-thing",
+    "name": "@nicholascannon-vgw/cool-thing",
     "version": "1.0.0",
     "main": "index.js",
-    "scripts": {
-        "publish": "echo \"Ran publish on cool-thing\""
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/vgw"
     }
 }
