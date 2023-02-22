@@ -1,0 +1,11 @@
+{
+    "name": "lerna-packages-mono",
+    "private": true,
+    "scripts": {},
+    "dependencies": {
+        "lerna": "^6.5.1"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
+}

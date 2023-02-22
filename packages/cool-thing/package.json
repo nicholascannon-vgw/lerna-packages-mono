@@ -1,0 +1,8 @@
+{
+    "name": "cool-thing",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "publish": "echo \"Ran publish on cool-thing\""
+    }
+}
