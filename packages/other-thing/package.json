@@ -8,6 +8,6 @@
         "directory": "@nicholascannon-vgw/other-thing"
     },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com/vgw"
+        "registry": "https://npm.pkg.github.com/nicholascannon-vgw"
     }
 }
