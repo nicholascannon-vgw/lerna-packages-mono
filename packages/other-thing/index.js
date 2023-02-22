@@ -1,1 +1,1 @@
-console.log('Other thing'); // changed!
+console.log('Other thing');
