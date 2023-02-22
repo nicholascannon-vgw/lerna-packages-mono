@@ -2,6 +2,11 @@
     "name": "@nicholascannon-vgw/other-thing",
     "version": "1.0.0",
     "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nicholascannon-vgw/lerna-packages-mono.git",
+        "directory": "@nicholascannon-vgw/other-thing"
+    },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/vgw"
     }
