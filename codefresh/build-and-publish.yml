@@ -1,0 +1,71 @@
+version: '1.0'
+
+stages:
+    - setup
+    - build
+    - package
+    - test
+    - publish
+
+steps:
+    clone:
+        title: Clone
+        stage: setup
+        type: git-clone
+        repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+        revision: ${{CF_REVISION}}
+        git: github
+
+    setup:
+        title: Setup NPM and install dependencies
+        stage: build
+        type: freestyle
+        image: node:16.13.2-slim
+        working_directory: ${{clone}}
+        commands:
+            - echo "@vgw:registry=https://npm.pkg.github.com" >> .npmrc
+            - echo "//npm.pkg.github.com/:_authToken=${{GH_NPM_TOKEN}}" >> .npmrc
+            - npm ci
+            - npx lerna exec --since HEAD~1 -- npm ci
+
+    build:
+        title: Build
+        stage: build
+        type: freestyle
+        image: node:16.13.2-slim
+        working_directory: ${{clone}}
+        commands:
+            - npx lerna run build --since HEAD~1
+
+    package:
+        title: Package
+        stage: package
+        type: freestyle
+        image: node:16.13.2-slim
+        working_directory: ${{clone}}
+        commands:
+            - npx lerna run check:published --since HEAD~1
+            - npx lerna exec --since HEAD~1 -- npm publish --dry-run
+
+    test:
+        title: Test
+        stage: test
+        type: freestyle
+        image: node:16.13.2-slim
+        working_directory: ${{clone}}
+        commands:
+            - npx lerna run test --since HEAD~1
+
+    publish:
+        title: Publish
+        stage: publish
+        type: freestyle
+        image: node:16.13.2-slim
+        working_directory: ${{clone}}
+        commands:
+            - npx lerna publish from-package -y
+        when:
+            condition:
+                all:
+                    mainBranch: '"${{CF_BRANCH}}" == "main"'
+                    vgwRepo: '"${{CF_REPO_OWNER}}" == "VGW"'
