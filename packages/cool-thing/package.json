@@ -1,6 +1,6 @@
 {
     "name": "@nicholascannon-vgw/cool-thing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "index.js",
     "scripts": {
         "check:published": "[ \"$(npm view .@${npm_package_version})\" == \"\" ] && exit 0 || echo \"Error: package exists\" && exit 1",
